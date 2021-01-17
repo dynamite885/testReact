@@ -1,29 +1,55 @@
+/* eslint-disable */
+
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
+function TicTacToeCell(props) {
+  let [mark, marking] = useState("　");
+  if (mark !== "　") {
+    return (
+      <td>
+        {mark}
+      </td>
+    );
+  }
+  return (
+    <td onClick={()=>{
+      props.turnData[1](props.turnData[0]+1);
+      if (props.turnData[0]%2 === 0) {
+        marking("X");
+      } else {
+        marking("O");
+      }
+    }}>{mark}</td>
+  );
+}
+
 function App() {
   // let [num, changeNum] = useState(0);
+  let [turn, turnOver] = useState(1);
+
   return (
     <div className="App">
       {/* <h1>{num}</h1>
       <button onClick={()=>{changeNum(--num)}}>-1</button>
       <button onClick={()=>{changeNum(++num)}}>+1</button> */}
-      <table border="1">
+      <table className="table" border="1">
         <tr>
-          <td>1</td>
-          <td>2</td>
-          <td>3</td>
+          <TicTacToeCell turnData={[turn, turnOver]} />
+          <TicTacToeCell turnData={[turn, turnOver]} />
+          <TicTacToeCell turnData={[turn, turnOver]} />
         </tr>
         <tr>
-          <td>4</td>
-          <td>5</td>
-          <td>6</td>
+          <TicTacToeCell turnData={[turn, turnOver]} />
+          <TicTacToeCell turnData={[turn, turnOver]} />
+          <TicTacToeCell turnData={[turn, turnOver]} />
         </tr>
         <tr>
-          <td>7</td>
-          <td>8</td>
-          <td>9</td>
+          <TicTacToeCell turnData={[turn, turnOver]} />
+          <TicTacToeCell turnData={[turn, turnOver]} />
+          <TicTacToeCell turnData={[turn, turnOver]} />
         </tr>
       </table>
     </div>
